@@ -1,0 +1,20 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:zcml="http://namespaces.zope.org/zcml">
+
+
+    <browser:page
+        for="p4a.calendar.interfaces.ICalendarEnhanced"
+        name="calendar_urls.html"
+        class=".configform.ConfigFormView"
+        permission="cmf.ModifyPortalContent"
+        layer=".interfaces.ICalendarFetcherLayer"
+        allowed_interface=".interfaces.IConfigFormView"
+        />
+
+    <adapter factory=".adapter.form_adapter" />
+
+</configure>
+
+

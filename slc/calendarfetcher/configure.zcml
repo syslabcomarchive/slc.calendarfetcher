@@ -5,15 +5,15 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="slc.calendarfetcher">
 
-  <five:registerPackage package="." initialize=".initialize" />
+    <five:registerPackage package="." initialize=".initialize" />
+    <include package=".browser" />
 
-  <genericsetup:registerProfile
-      name="default"
-      title="slc.calendarfetcher"
-      directory="profiles/default"
-      description="Installs the slc.calendarfetcher package"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
-  <!-- -*- extra stuff goes here -*- -->
+    <genericsetup:registerProfile
+        name="default"
+        title="slc.calendarfetcher"
+        directory="profiles/default"
+        description="Installs the slc.calendarfetcher package"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
   
 </configure>
