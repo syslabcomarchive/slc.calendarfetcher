@@ -11,8 +11,10 @@ class TextLineURLValidator(validator.SimpleFieldValidator):
         urls = [v.strip() for v in value.split()]
         verify = validation.validatorFor("isURL")
         for url in urls:
-            if verify(url) != True:
+            # Google's (and perhaps other) ICS URLs don't validate, so we only
+            # validate the first part...
+            surl = '/'.join(url.split('/')[:3])
+            if verify(str(surl)) != True:
                 msg = _("The specified resource, '%s' is not a valid URL." % url)
                 raise interfaces.InvalidURI(msg)
-
 
