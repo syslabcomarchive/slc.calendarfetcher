@@ -16,12 +16,8 @@
             Return
     </a>
     <p>
-        Please provide a list of ICS calendar URL addresses, each one on a new
-        line.
-    </p>
-    <p>
-        This calendar will then automatically be updated with events from the
-        remote calendars.
+        The Calendar Fetcher will periodically fetch events from other calendars by using
+        their iCal (*.ics) URLs specified here.
     </p>
 </metal:slot>
 
