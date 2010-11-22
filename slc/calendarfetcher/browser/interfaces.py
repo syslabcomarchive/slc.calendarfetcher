@@ -14,15 +14,25 @@ class IConfigForm(interface.Interface):
     calendar_urls = schema.Text(
                         title=_(u"Calendar URLs"),
                         description=_(
-                            u"Specify the URLs which the fetcher must import"
+                            u" Please provide a list of ICS calendar URL "
+                            u"addresses, each one on a new line. This "
+                            u"calendar will then automatically be updated "
+                            u"with events from the remote calendars."
                             ),
                         required=True,
                         ) 
+    add_url = button.Button(title=u'Save URLs')
+    add_and_refresh = button.Button(title=u'Save and fetch the URLs')
 
-    add_url = button.Button(title=u'Submit')
 
-
-class IConfigFormView(interface.Interface):
+class IFetcherConfigView(interface.Interface):
     """ Marker interface
     """
+
+class IFetcherUtils(interface.Interface):
+    """ Marker interface
+    """
+
+    def is_calendar_enhanced(self):
+        """ """
 

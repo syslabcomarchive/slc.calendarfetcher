@@ -6,11 +6,20 @@
 
     <browser:page
         for="p4a.calendar.interfaces.ICalendarEnhanced"
-        name="calendar_urls.html"
-        class=".configform.ConfigFormView"
+        name="calendar_urls"
+        class=".calendarfetcher.FetcherConfigView"
         permission="cmf.ModifyPortalContent"
         layer=".interfaces.ICalendarFetcherLayer"
-        allowed_interface=".interfaces.IConfigFormView"
+        allowed_interface=".interfaces.IFetcherConfigView"
+        />
+
+    <browser:page
+        for="*"
+        name="calendarfetcher_utils"
+        class=".calendarfetcher.FetcherUtils"
+        permission="cmf.ModifyPortalContent"
+        layer=".interfaces.ICalendarFetcherLayer"
+        allowed_interface=".interfaces.IFetcherUtils"
         />
 
     <adapter factory=".adapter.form_adapter" />
