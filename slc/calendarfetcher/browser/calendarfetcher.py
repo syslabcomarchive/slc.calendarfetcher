@@ -1,4 +1,5 @@
 import logging
+from urllib2 import HTTPError
 import Acquisition 
 
 import zope.component
@@ -78,10 +79,22 @@ class ConfigForm(form.Form):
 
         annotations = IAnnotations(self.context)
         annotations['slc.calendarfetcher-urls'] = urls
-
-        # TODO: Implement Fetching
         addStatusMessage(self.request, 'URLs Saved', type='info')
-        addStatusMessage(self.request, 'Calendars Imported', type='info')
+
+        for url in urls:
+            view = zope.component.queryMultiAdapter((self.context, self.request), 
+                                          name='import.html', 
+                                          default=None
+                                        )
+            try:
+                message = view.import_from_url(url)
+            except HTTPError, e:
+                msg = "Received a '404 Not Found' error %s" % url
+                addStatusMessage(self.request, msg, type='error')
+            else:
+                msg = '%s from %s' % (message, url)
+                addStatusMessage(self.request, msg, type='info')
+
         self.request.response.redirect(self.context.REQUEST.get('URL'))
 
 
