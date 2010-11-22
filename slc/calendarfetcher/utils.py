@@ -4,6 +4,7 @@ from Products.Archetypes.utils import addStatusMessage
 
 def fetch_calendars(context, request, urls):
     messages = []
+    title = context.Title()
     for url in urls:
         view = zope.component.queryMultiAdapter((context, request), 
                                         name='import.html', 
@@ -19,6 +20,12 @@ def fetch_calendars(context, request, urls):
             addStatusMessage(request, msg, type='info')
 
         messages.append(msg)
+    
+    # XXX: The calendar importer in Products.Calendaring.tool changes the name
+    # of the ICalendarEnhanced folder to the name of the imported folder.
+    # We restore it here.
+    if context.Title() != title:
+        context.setTitle(title)
 
     return messages
 
