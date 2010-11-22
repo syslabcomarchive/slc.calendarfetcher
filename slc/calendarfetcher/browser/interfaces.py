@@ -29,10 +29,13 @@ class IFetcherConfigView(interface.Interface):
     """ Marker interface
     """
 
-class IFetcherUtils(interface.Interface):
+class ICalendarFetcherUtils(interface.Interface):
     """ Marker interface
     """
 
     def is_calendar_enhanced(self):
+        """ """
+
+    def fetch_all_calendars(self):
         """ """
 

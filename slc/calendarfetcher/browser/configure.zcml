@@ -16,10 +16,10 @@
     <browser:page
         for="*"
         name="calendarfetcher_utils"
-        class=".calendarfetcher.FetcherUtils"
+        class=".calendarfetcher.CalendarFetcherUtils"
         permission="cmf.ModifyPortalContent"
         layer=".interfaces.ICalendarFetcherLayer"
-        allowed_interface=".interfaces.IFetcherUtils"
+        allowed_interface=".interfaces.ICalendarFetcherUtils"
         />
 
     <adapter factory=".adapter.form_adapter" />

@@ -1,5 +1,4 @@
 import logging
-from urllib2 import HTTPError
 import Acquisition 
 
 import zope.component
@@ -15,12 +14,14 @@ from plone.z3cform import z2
 from plone.z3cform.layout import FormWrapper
 
 from Products.Archetypes.utils import addStatusMessage
+from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 
 from p4a.calendar.interfaces import ICalendarEnhanced
 
 from slc.calendarfetcher.validators import TextLineURLValidator
 from slc.calendarfetcher import calendarfetcher_messagefactory as _
+from slc.calendarfetcher import utils
 import interfaces
 
 log = logging.getLogger('slc.calendarfetcher.browser.configform.py')
@@ -74,27 +75,13 @@ class ConfigForm(form.Form):
 
         if data.has_key('calendar_urls'):
             urls = [v for v in data['calendar_urls'].split()]
+            utils.fetch_calendars(self.context, self.request, urls)
         else:
             urls = []
 
         annotations = IAnnotations(self.context)
         annotations['slc.calendarfetcher-urls'] = urls
         addStatusMessage(self.request, 'URLs Saved', type='info')
-
-        for url in urls:
-            view = zope.component.queryMultiAdapter((self.context, self.request), 
-                                          name='import.html', 
-                                          default=None
-                                        )
-            try:
-                message = view.import_from_url(url)
-            except HTTPError, e:
-                msg = "Received a '404 Not Found' error %s" % url
-                addStatusMessage(self.request, msg, type='error')
-            else:
-                msg = '%s from %s' % (message, url)
-                addStatusMessage(self.request, msg, type='info')
-
         self.request.response.redirect(self.context.REQUEST.get('URL'))
 
 
@@ -142,9 +129,9 @@ validator.WidgetValidatorDiscriminators(
 zope.component.provideAdapter(TextLineURLValidator)
 
 
-class FetcherUtils(BrowserView):
+class CalendarFetcherUtils(BrowserView):
     """ """
-    interface.implements(interfaces.IFetcherUtils)
+    interface.implements(interfaces.ICalendarFetcherUtils)
     id = u'calendar_urls.html'
     label = _(u"Configuration Settings for the Calendar fetcher")
 
@@ -153,16 +140,19 @@ class FetcherUtils(BrowserView):
         context = Acquisition.aq_inner(self.context)
         return ICalendarEnhanced.providedBy(context)
 
-    def fetch_calendars(self):
+    def fetch_all_calendars(self):
         """ """
-        context = Acquisition.aq_inner(self.context)
-        annotations = IAnnotations(context)
-        urls = annotations['slc.calendarfetcher-urls']
-        for url in urls:
-            cal_url = '/'.join(url.split('/')[:3])
-            # Import the URL
-            items = 0 # FIXME
-            msg = "%s items imported from %s" % (len(items), cal_url)
-            addStatusMessage(self.request, msg)
+        messages = {}
+        catalog = getToolByName(self.context, 'portal_catalog')
+        brains = catalog(
+                    object_provides="p4a.calendar.interfaces.ICalendarEnhanced"
+                    )
+        for brain in brains:
+            calendar = brain.getObject()
+            annotations = IAnnotations(calendar)
+            urls = annotations['slc.calendarfetcher-urls']
+            messages[brain.getURL()] = utils.fetch_calendars(calendar, self.request, urls)
+
+        return messages
 
 
