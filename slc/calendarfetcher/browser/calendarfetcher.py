@@ -140,6 +140,20 @@ class CalendarFetcherUtils(BrowserView):
         context = Acquisition.aq_inner(self.context)
         return ICalendarEnhanced.providedBy(context)
 
+    def fetch_calendars(self):
+        """ """
+        messages = {}
+        if not self.is_calendar_enhanced():
+            return 'Not an ICalendarEnhanced object'
+            
+        calendar = Acquisition.aq_inner(self.context)
+        annotations = IAnnotations(calendar)
+        urls = annotations['slc.calendarfetcher-urls']
+        messages['/'.join(calendar.getPhysicalPath())] = \
+                utils.fetch_calendars(calendar, self.request, urls)
+
+        return messages
+
     def fetch_all_calendars(self):
         """ """
         messages = {}
