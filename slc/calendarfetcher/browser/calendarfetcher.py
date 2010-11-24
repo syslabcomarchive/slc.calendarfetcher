@@ -43,7 +43,7 @@ class ConfigForm(form.Form):
         annotations = IAnnotations(self.context)
         widget_value = self.request.get('form.widgets.calendar_urls')
         if not widget_value:
-            urls = annotations['slc.calendarfetcher-urls']
+            urls = annotations.get('slc.calendarfetcher-urls', [])
             widget_value = u'\n'.join(unicode(v) for v in sorted(urls or []))
 
         self.widgets['calendar_urls'].value = widget_value
