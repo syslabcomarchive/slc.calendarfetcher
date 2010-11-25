@@ -2,7 +2,6 @@
 <metadata>
     <version>1000</version>
     <dependencies>
-        <dependency>profile-Products.Calendaring:default</dependency>
         <dependency>profile-p4a.plonecalendar:default</dependency>
     </dependencies>
 </metadata>

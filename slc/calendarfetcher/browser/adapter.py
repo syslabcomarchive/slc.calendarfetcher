@@ -1,9 +1,8 @@
 import os
-import plone.z3cform
-
+from plone.z3cform.templates import ZopeTwoFormTemplateFactory
 from slc.calendarfetcher.browser.calendarfetcher import FetcherConfigView
 
-form_adapter = plone.z3cform.templates.ZopeTwoFormTemplateFactory(
+form_adapter = ZopeTwoFormTemplateFactory(
         os.path.join(os.path.dirname(__file__), 'templates/configform.pt'),
         form=FetcherConfigView
         )
