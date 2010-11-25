@@ -8,14 +8,18 @@ from zope.annotation.interfaces import IAnnotations
 from Testing import ZopeTestCase as ztc
 
 from Products.Five import fiveconfigure
+from Products.Five import zcml
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import PloneSite
-ptc.setupPloneSite()
+from Products.CMFCore.utils import getToolByName
 
 import slc.calendarfetcher
 from p4a.calendar.interfaces import ICalendarEnhanced
 
-
+PRODUCTS = [
+        'slc.calendarfetcher',
+        ]
+ptc.setupPloneSite(products=PRODUCTS)
 class TestCase(ptc.PloneTestCase):
 
     class layer(PloneSite):
@@ -23,8 +27,9 @@ class TestCase(ptc.PloneTestCase):
         @classmethod
         def setUp(cls):
             fiveconfigure.debug_mode = True
-            ztc.installPackage(slc.calendarfetcher)
+            zcml.load_config('configure.zcml', slc.calendarfetcher)
             fiveconfigure.debug_mode = False
+            ztc.installPackage(slc.calendarfetcher)
 
         @classmethod
         def tearDown(cls):
@@ -56,9 +61,10 @@ class TestFetcher(TestCase):
         portal = self.portal
         calendar = getattr(portal, 'calendar')
         request = self.folder.REQUEST
+        quickinstaller = getToolByName(calendar, 'portal_quickinstaller')
         view = component.queryMultiAdapter(
                                     (calendar, request), 
-                                    name='calendarfetcher_utils', 
+                                    name='@@calendar_urls', 
                                     default=None
                                     )
 
