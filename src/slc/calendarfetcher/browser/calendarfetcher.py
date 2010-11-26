@@ -1,8 +1,8 @@
 import logging
 import Acquisition 
 
-import zope.component
-import zope.interface
+from zope import component
+from zope import interface
 from zope.annotation.interfaces import IAnnotations
 
 from z3c.form import form
@@ -11,7 +11,11 @@ from z3c.form import button
 from z3c.form import validator
 
 from plone.z3cform import z2
-from plone.z3cform.interfaces import IWrappedForm
+try:
+    # Only available from version 0.6 onwards
+    from plone.z3cform.interfaces import IWrappedForm
+except:
+    IWrappedForm = None
 from plone.z3cform.layout import FormWrapper
 
 from Products.Archetypes.utils import addStatusMessage
@@ -90,7 +94,7 @@ class ConfigForm(form.Form):
 
 class FetcherConfigView(FormWrapper):
     """ """
-    zope.interface.implements(interfaces.IFetcherConfigView)
+    interface.implements(interfaces.IFetcherConfigView)
     id = u'calendar_urls.html'
     label = _(u"Configuration Settings for the Calendar fetcher")
     form = ConfigForm
@@ -98,7 +102,8 @@ class FetcherConfigView(FormWrapper):
     def __init__(self, context, request):
         super(FetcherConfigView, self).__init__(context, request)
         self.form_instance = self.form(self.context, self.request)
-        zope.interface.alsoProvides(self.form_instance, IWrappedForm)
+        if IWrappedForm is not None:
+            interface.alsoProvides(self.form_instance, IWrappedForm)
 
     def update(self):
         z2.switch_on(self, request_layer=self.request_layer)
@@ -125,12 +130,12 @@ validator.WidgetValidatorDiscriminators(
                         )
 
 # Register the validator so it will be looked up by z3c.form machinery
-zope.component.provideAdapter(TextLineURLValidator)
+component.provideAdapter(TextLineURLValidator)
 
 
 class CalendarFetcherUtils(BrowserView):
     """ """
-    zope.interface.implements(interfaces.ICalendarFetcherUtils)
+    interface.implements(interfaces.ICalendarFetcherUtils)
     id = u'calendar_urls.html'
     label = _(u"Configuration Settings for the Calendar fetcher")
 
