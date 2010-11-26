@@ -2,7 +2,7 @@ import logging
 import Acquisition 
 
 import zope.component
-from zope import interface
+import zope.interface
 from zope.annotation.interfaces import IAnnotations
 
 from z3c.form import form
@@ -11,6 +11,7 @@ from z3c.form import button
 from z3c.form import validator
 
 from plone.z3cform import z2
+from plone.z3cform.interfaces import IWrappedForm
 from plone.z3cform.layout import FormWrapper
 
 from Products.Archetypes.utils import addStatusMessage
@@ -25,6 +26,8 @@ from slc.calendarfetcher import utils
 import interfaces
 
 log = logging.getLogger('slc.calendarfetcher.browser.configform.py')
+
+
 
 class ConfigForm(form.Form):
     """ """
@@ -87,36 +90,32 @@ class ConfigForm(form.Form):
 
 class FetcherConfigView(FormWrapper):
     """ """
-    interface.implements(interfaces.IFetcherConfigView)
+    zope.interface.implements(interfaces.IFetcherConfigView)
     id = u'calendar_urls.html'
     label = _(u"Configuration Settings for the Calendar fetcher")
-
-    form = None # override this with a form class.
-    forms = [ ConfigForm, ]
+    form = ConfigForm
 
     def __init__(self, context, request):
         super(FetcherConfigView, self).__init__(context, request)
-        self.form_instances = \
-            [form(Acquisition.aq_inner(self.context), self.request) for form in self.forms]
+        self.form_instance = self.form(self.context, self.request)
+        zope.interface.alsoProvides(self.form_instance, IWrappedForm)
 
     def update(self):
         z2.switch_on(self, request_layer=self.request_layer)
-        for form_instace in self.form_instances:
-            form_instace.update()
+        self.form_instance.update()
 
     def contents(self):
         z2.switch_on(self, request_layer=self.request_layer)
         # XXX really messed up hack to support plone.z3cform < 0.5.8
-        # We call every form to make the widgets property available on it,
+        # We call the form to make the widgets property available on it,
         # otherwise view/widgets fails
-        # XXX: FIXME!!!
-        [fi() for fi in self.form_instances]
-        return ''.join([fi.render() for fi in self.form_instances])
+        self.form_instance()
+        return self.form_instance.render()
 
     def render_form(self):
         """This method combines the individual forms and renders them.
         """
-        return ''.join([fi() for fi in self.form_instances])
+        return self.form_instance()
 
 
 # set conditions for which fields the validator class applies
@@ -131,7 +130,7 @@ zope.component.provideAdapter(TextLineURLValidator)
 
 class CalendarFetcherUtils(BrowserView):
     """ """
-    interface.implements(interfaces.ICalendarFetcherUtils)
+    zope.interface.implements(interfaces.ICalendarFetcherUtils)
     id = u'calendar_urls.html'
     label = _(u"Configuration Settings for the Calendar fetcher")
 
