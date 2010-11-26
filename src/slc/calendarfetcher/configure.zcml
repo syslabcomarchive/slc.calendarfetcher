@@ -7,6 +7,9 @@
 
     <five:registerPackage package="." initialize=".initialize" />
     <include package=".browser" />
+    <include package="plone.z3cform" />
+    <include package="p4a.calendar" />
+    <include package="p4a.subtyper" />
     <include package="p4a.plonecalendar" />
 
     <genericsetup:registerProfile
