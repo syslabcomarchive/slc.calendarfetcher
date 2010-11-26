@@ -2,6 +2,6 @@
 <metadata>
     <version>1000</version>
     <dependencies>
-        <dependency>profile-p4a.plonecalendar:default</dependency>
+        <dependency>profile-p4a.subtyper:default</dependency>
     </dependencies>
 </metadata>
