@@ -14,6 +14,7 @@ from plone.z3cform import z2
 try:
     # Only available from version 0.6 onwards
     from plone.z3cform.interfaces import IWrappedForm
+    IWrappedForm = IWrappedForm # Pyflakes
 except:
     IWrappedForm = None
 from plone.z3cform.layout import FormWrapper
