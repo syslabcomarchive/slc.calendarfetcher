@@ -1,47 +1,59 @@
 import unittest
 
-#from zope.testing import doctestunit
-#from zope.component import testing
 from zope import component
 from zope.interface import alsoProvides
 from zope.annotation.interfaces import IAnnotations
 from Testing import ZopeTestCase as ztc
+
+from plone import browserlayer
 
 from Products.Five import fiveconfigure
 from Products.Five import zcml
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import PloneSite
 from Products.CMFCore.utils import getToolByName
+from slc.calendarfetcher.browser.interfaces import ICalendarFetcherLayer
 
-import slc.calendarfetcher
 from p4a.calendar.interfaces import ICalendarEnhanced
 
-PRODUCTS = [
-        'slc.calendarfetcher',
-        ]
-ptc.setupPloneSite(products=PRODUCTS)
+class CalendarFetcherTestLayer(PloneSite):
+
+    @classmethod
+    def setUp(cls):
+        """ """
+        PRODUCTS = [
+                'plone.z3cform',
+                'p4a.calendar',
+                'p4a.plonecalendar',
+                'p4a.subtyper',
+                'Calendaring',
+                'slc.calendarfetcher',
+                ]
+        ptc.setupPloneSite(products=PRODUCTS)
+
+        fiveconfigure.debug_mode = True
+        import slc.calendarfetcher
+        zcml.load_config('configure.zcml', slc.calendarfetcher)
+        fiveconfigure.debug_mode = False
+        ztc.installProduct('Marshall')
+        ztc.installProduct('Calendaring')
+        ztc.installPackage('slc.calendarfetcher')
+        browserlayer.utils.register_layer(
+                                ICalendarFetcherLayer,
+                                name='slc.calendarfetcher')
+        PloneSite.setUp()
+
+
 class TestCase(ptc.PloneTestCase):
-
-    class layer(PloneSite):
-
-        @classmethod
-        def setUp(cls):
-            fiveconfigure.debug_mode = True
-            zcml.load_config('configure.zcml', slc.calendarfetcher)
-            fiveconfigure.debug_mode = False
-            ztc.installPackage(slc.calendarfetcher)
-
-        @classmethod
-        def tearDown(cls):
-            pass
+    """Base class used for test cases
+    """
+    layer = CalendarFetcherTestLayer 
 
 
 class TestFetcher(TestCase):
 
     def afterSetUp(self):
-        """ Create a Seminar object, and call the relevant event to enable the
-            auto-creation of the sub-objects ('speakers', 'speech venues').
-        """
+        """ """
         self.loginAsPortalOwner()
         portal = self.portal
         portal.invokeFactory('Folder', 'calendar', title="Calendar")
@@ -61,17 +73,29 @@ class TestFetcher(TestCase):
         portal = self.portal
         calendar = getattr(portal, 'calendar')
         request = self.folder.REQUEST
-        quickinstaller = getToolByName(calendar, 'portal_quickinstaller')
-        view = component.queryMultiAdapter(
-                                    (calendar, request), 
-                                    name='@@calendar_urls', 
-                                    default=None
-                                    )
 
-        # Check that subflolders are created.
+        qi = getToolByName(self.portal, 'portal_quickinstaller')
+        assert(qi.isProductInstallable('slc.calendarfetcher'))
+        assert(qi.isProductInstalled('slc.calendarfetcher'))
+        assert(ICalendarFetcherLayer in browserlayer.utils.registered_layers())
+        # FIXME:
+        # Doesn't find the view unless I remove the "layer" attr in the
+        # <browser:page> declaration in slc.calendarfetcher.browser.configure.zcml
+        # 
+        # The layer is however being registered, I make sure of that in the 'setUp' method
+        # and I test for it above. So I'm at a loss as to what is the problem
+        # here...
+
+        # This returns None, even if the layer is not required... wierd
+        view = component.queryMultiAdapter(
+                        (self.portal.calendar, self.portal.calendar.REQUEST),
+                        name='@@calendarfetcher_utils')
+
+        # Only works when browserlayer requirement is removed.
+        view = self.portal.calendar.restrictedTraverse('@@calendarfetcher_utils')
+
         view.fetch_calendars()
         self.assertEquals(len(calendar.objectValues()) !=  0, True)
-
 
 
 def test_suite():
