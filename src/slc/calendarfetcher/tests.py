@@ -6,6 +6,7 @@ from zope.annotation.interfaces import IAnnotations
 from Testing import ZopeTestCase as ztc
 
 from plone import browserlayer
+from plone.browserlayer import utils as browserlayerutils
 
 from Products.Five import fiveconfigure
 from Products.Five import zcml
@@ -16,31 +17,32 @@ from slc.calendarfetcher.browser.interfaces import ICalendarFetcherLayer
 
 from p4a.calendar.interfaces import ICalendarEnhanced
 
+PRODUCTS = [
+        'plone.z3cform',
+        'p4a.calendar',
+        'p4a.plonecalendar',
+        'p4a.subtyper',
+        'Calendaring',
+        'slc.calendarfetcher',
+        ]
+ptc.setupPloneSite(products=PRODUCTS)
+ztc.installProduct('Marshall')
+ztc.installProduct('Calendaring')
+
 class CalendarFetcherTestLayer(PloneSite):
 
     @classmethod
     def setUp(cls):
         """ """
-        PRODUCTS = [
-                'plone.z3cform',
-                'p4a.calendar',
-                'p4a.plonecalendar',
-                'p4a.subtyper',
-                'Calendaring',
-                'slc.calendarfetcher',
-                ]
-        ptc.setupPloneSite(products=PRODUCTS)
-
         fiveconfigure.debug_mode = True
         import slc.calendarfetcher
         zcml.load_config('configure.zcml', slc.calendarfetcher)
         fiveconfigure.debug_mode = False
-        ztc.installProduct('Marshall')
-        ztc.installProduct('Calendaring')
         ztc.installPackage('slc.calendarfetcher')
-        browserlayer.utils.register_layer(
+        browserlayerutils.register_layer(
                                 ICalendarFetcherLayer,
-                                name='slc.calendarfetcher')
+                                name='slc.calendarfetcher'
+                                )
         PloneSite.setUp()
 
 
@@ -106,3 +108,4 @@ def test_suite():
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')
+
