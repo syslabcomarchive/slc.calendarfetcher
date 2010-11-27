@@ -9,4 +9,12 @@ repeatable, ensuring that your Plone calendar is always up to date with the
 events from an outside calendar.
 
 
+Installation:
+-------------
+
+slc.calendarfetcher can be installed via the portal_quickinstaller or the Plone
+Control Panel's Add-remove products section.
+
+Products.Calendaring is a dependency that needs to be installed manually (for
+now).
 
