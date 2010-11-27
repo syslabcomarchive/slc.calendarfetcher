@@ -26,7 +26,6 @@ setup(name='slc.calendarfetcher',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'Marshaller',
           'z3c.form==1.9.0',
           'plone.z3cform<=0.6',
           'dateable.chronos',
