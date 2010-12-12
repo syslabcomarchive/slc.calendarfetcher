@@ -8,6 +8,10 @@ class TextLineURLValidator(validator.SimpleFieldValidator):
 
     def validate(self, value):
         """  """
+        if value is None:
+            msg = _("Please provide a valid URL.")
+            raise interfaces.InvalidURI(msg)
+
         urls = [v.strip() for v in value.split()]
         verify = validation.validatorFor("isURL")
         for url in urls:
