@@ -3,18 +3,6 @@
            xmlns:five="http://namespaces.zope.org/five"
            xmlns:zcml="http://namespaces.zope.org/zcml">
 
-    <!-- 'Veldbrand' Zope 3 browser layer
-        Register views, viewlets and resources for this layer to make sure
-        they only apply to the 'Veldbrand' theme.
-        You can also use this layer to override default Plone browser views
-        and viewlets only within the 'Veldbrand' theme.
-    -->
-    <interface
-        interface=".interfaces.ICalendarFetcherLayer"
-        type="zope.publisher.interfaces.browser.IBrowserSkinType"
-        name="Veldbrand"
-        />
-
     <browser:page
         for="p4a.calendar.interfaces.ICalendarEnhanced"
         name="calendar_urls"
