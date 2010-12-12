@@ -5,7 +5,7 @@ version = '0.1b3'
 
 setup(name='slc.calendarfetcher',
       version=version,
-      description="slc.calendarfetcher will automatically and regularly fetch and import calendars from the ICS URLs you give it.",
+      description="slc.calendarfetcher will fetch and import calendars from the ICS URLs you give it.",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
