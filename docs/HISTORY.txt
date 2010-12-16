@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Bugfix. Account for entries not being present in the annotations dict. [jcbrand]
+- Renamed utility method for fetching calendars to avoid confusion. [jcbrand]
 
 0.1b3 (2010-12-13)
 ------------------
