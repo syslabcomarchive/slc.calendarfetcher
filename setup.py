@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1b3'
+version = 'y'
 
 setup(name='slc.calendarfetcher',
       version=version,
       description="slc.calendarfetcher will fetch and import calendars from the ICS URLs you give it.",
       long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+                       open(os.path.join("docs", "CHANGES.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
