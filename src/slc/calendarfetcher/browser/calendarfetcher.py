@@ -145,8 +145,8 @@ class CalendarFetcherUtils(BrowserView):
         context = Acquisition.aq_inner(self.context)
         return ICalendarEnhanced.providedBy(context)
 
-    def fetch_calendars(self):
-        """ Fetch all the calendars as specified in the currentc context.
+    def fetch_remote_calendars(self):
+        """ Fetch all the calendars as specified in the current context.
         """
         messages = {}
         if not self.is_calendar_enhanced():
@@ -160,7 +160,7 @@ class CalendarFetcherUtils(BrowserView):
 
         return messages
 
-    def fetch_all_calendars(self):
+    def fetch_all_remote_calendars(self):
         """ Fetch all the calendars for every ICalendarEnhanced folder in the
             entire website.
         """

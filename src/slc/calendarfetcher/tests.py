@@ -94,10 +94,10 @@ class TestFetcher(TestCase):
         #                 name='@@calendarfetcher_utils')
 
         # # Only works when browserlayer requirement is removed.
-        # view = self.portal.calendar.restrictedTraverse('@@calendarfetcher_utils')
+        view = self.portal.calendar.restrictedTraverse('@@calendarfetcher_utils')
 
-        # view.fetch_calendars()
-        # self.assertEquals(len(calendar.objectValues()) !=  0, True)
+        view.fetch_remote_calendars()
+        self.assertEquals(len(calendar.objectValues()) !=  0, True)
 
 
 def test_suite():

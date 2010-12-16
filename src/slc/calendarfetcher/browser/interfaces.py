@@ -36,9 +36,9 @@ class ICalendarFetcherUtils(interface.Interface):
     def is_calendar_enhanced(self):
         """ """
 
-    def fetch_calendars(self):
+    def fetch_remote_calendars(self):
         """ """
 
-    def fetch_all_calendars(self):
+    def fetch_all_remote_calendars(self):
         """ """
 
