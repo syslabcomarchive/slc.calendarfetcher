@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1b4 (Unreleased)
+------------------
+
+- Bugfix. Account for entries not being present in the annotations dict. [jcbrand]
+
 0.1b3 (2010-12-13)
 ------------------
 

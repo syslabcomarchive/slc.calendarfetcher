@@ -154,7 +154,7 @@ class CalendarFetcherUtils(BrowserView):
             
         calendar = Acquisition.aq_inner(self.context)
         annotations = IAnnotations(calendar)
-        urls = annotations['slc.calendarfetcher-urls']
+        urls = annotations.get('slc.calendarfetcher-urls', [])
         messages['/'.join(calendar.getPhysicalPath())] = \
                 utils.fetch_calendars(calendar, self.request, urls)
 
