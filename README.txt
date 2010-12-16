@@ -15,6 +15,11 @@ By using a cronjob or Zope's clockserver, this can be made automatic and periodi
 repeatable, ensuring that your Plone calendar is always up to date with the
 events from any other ICS conforming calendar (like iCal or Google Calendar).
 
+You can use the following URL to update all the calendars in a site that have remote
+ICS files specified (NOTE: requires authentication):
+
+http://mysite.com/@@calendarfetcher_utils/fetch_all_remote_calendars
+
 
 Installation:
 -------------
