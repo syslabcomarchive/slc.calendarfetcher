@@ -93,10 +93,17 @@ class TestFetcher(TestCase):
         #                 (self.portal.calendar, self.portal.calendar.REQUEST),
         #                 name='@@calendarfetcher_utils')
 
-        # # Only works when browserlayer requirement is removed.
+        # Only works when browserlayer requirement is removed.
+        # So for now when I test, I first remove it manually. Blegh! 
         view = self.portal.calendar.restrictedTraverse('@@calendarfetcher_utils')
 
         view.fetch_remote_calendars()
+        self.assertEquals(len(calendar.objectValues()) !=  0, True)
+
+        calendar.manage_delObjects(calendar.objectIds())
+        self.assertEquals(len(calendar.objectValues()), 0)
+
+        view.fetch_all_remote_calendars()
         self.assertEquals(len(calendar.objectValues()) !=  0, True)
 
 
