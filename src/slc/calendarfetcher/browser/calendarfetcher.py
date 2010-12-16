@@ -146,7 +146,8 @@ class CalendarFetcherUtils(BrowserView):
         return ICalendarEnhanced.providedBy(context)
 
     def fetch_calendars(self):
-        """ """
+        """ Fetch all the calendars as specified in the currentc context.
+        """
         messages = {}
         if not self.is_calendar_enhanced():
             return 'Not an ICalendarEnhanced object'
@@ -160,7 +161,9 @@ class CalendarFetcherUtils(BrowserView):
         return messages
 
     def fetch_all_calendars(self):
-        """ """
+        """ Fetch all the calendars for every ICalendarEnhanced folder in the
+            entire website.
+        """
         messages = {}
         catalog = getToolByName(self.context, 'portal_catalog')
         brains = catalog(
@@ -169,7 +172,7 @@ class CalendarFetcherUtils(BrowserView):
         for brain in brains:
             calendar = brain.getObject()
             annotations = IAnnotations(calendar)
-            urls = annotations['slc.calendarfetcher-urls']
+            urls = annotations.get('slc.calendarfetcher-urls', [])
             messages[brain.getURL()] = utils.fetch_calendars(calendar, self.request, urls)
 
         return messages
