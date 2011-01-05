@@ -138,7 +138,7 @@ class CalendarFetcherUtils(BrowserView):
     """ """
     interface.implements(interfaces.ICalendarFetcherUtils)
     id = u'calendar_urls.html'
-    label = _(u"Configuration Settings for the Calendar fetcher")
+    label = _(u"Utilities for the Calendar fetcher")
 
     def is_calendar_enhanced(self):
         """ """
