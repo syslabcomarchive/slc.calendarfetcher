@@ -24,12 +24,12 @@ msgstr ""
 
 #: slc.calendarfetcher:/browser/calendarfetcher.py:141
 msgid "Utilities for the Calendar fetcher"
-msgstr "Nutsprogramme vir CalendarFetcher"
+msgstr "Nutsprogramme vir die CalendarFetcher"
 
 #: slc.calendarfetcher:/browser/calendarfetcher.py:39
 #: slc.calendarfetcher:/browser/calendarfetcher.py:100
 msgid "Configuration Settings for the Calendar fetcher"
-msgstr "Konfigurasie instellings vir CalendarFetcher"
+msgstr "Konfigurasie instellings vir die CalendarFetcher"
 
 #: slc.calendarfetcher:/browser/calendarfetcher.py:79
 msgid "Please correct the following errors before saving the form"
@@ -37,7 +37,7 @@ msgstr "Korrigeer asseblief die volgende foute en stoor dan weer die vorm"
 
 #: slc.calendarfetcher:/browser/interfaces.py:15
 msgid "Calendar URLs"
-msgstr "Kalender"
+msgstr "Kalender adresse"
 
 #: slc.calendarfetcher:/browser/interfaces.py:16
 msgid ""
@@ -51,16 +51,16 @@ msgstr ""
 
 #: slc.calendarfetcher:/browser/interfaces.py:24
 msgid "Save URLs"
-msgstr ""
+msgstr "Stoor"
 
 #: slc.calendarfetcher:/browser/interfaces.py:25
 msgid "Save and fetch the URLs"
-msgstr ""
+msgstr "Stoor en gaan haal die kalenders"
 
 #. Default: "The Calendar Fetcher will periodically fetch events from other calendars by using their iCal (*.ics) URLs specified here."
 #: slc.calendarfetcher:/browser/templates/configform.pt:23
 msgid "configform_description"
-msgstr ""
+msgstr "Die CalendarFetcher kan periodies gebeure van ander kalenders (d.m.v hul ICS adresse hier verskaf) invoer en tot hierdie kalender byvoeg."
 
 #: slc.calendarfetcher:/validators.py:12
 msgid "Please provide a valid URL."

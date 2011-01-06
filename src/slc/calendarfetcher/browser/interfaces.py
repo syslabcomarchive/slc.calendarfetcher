@@ -16,13 +16,13 @@ class IConfigForm(interface.Interface):
                         description=_(
                             u" Please provide a list of ICS calendar URL "
                             u"addresses, each one on a new line. This "
-                            u"calendar will then automatically be updated "
-                            u"with events from the remote calendars."
+                            u"calendar can then be updated "
+                            u"with events from these remote calendars."
                             ),
                         required=True,
                         ) 
-    add_url = button.Button(title=_(u'Save URLs'))
-    add_and_refresh = button.Button(title=_(u'Save and fetch the URLs'))
+    add_url = button.Button(title=_(u"Save"))
+    add_and_refresh = button.Button(title=_(u"Save and fetch the calendars"))
 
 
 class IFetcherConfigView(interface.Interface):

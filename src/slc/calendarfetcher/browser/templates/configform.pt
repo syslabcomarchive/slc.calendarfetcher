@@ -21,8 +21,8 @@
         </a>
     </metal:block>
     <p i18n:translate="configform_description">
-        The Calendar Fetcher will periodically fetch events from other calendars by using
-        their iCal (*.ics) URLs specified here.
+        The CalendarFetcher can fetch and import events from other calendars by using
+        their ICS addresses specified here. 
     </p>
 </metal:slot>
 
