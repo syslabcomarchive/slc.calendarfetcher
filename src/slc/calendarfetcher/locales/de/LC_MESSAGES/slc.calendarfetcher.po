@@ -18,19 +18,19 @@ msgstr ""
 #: slc.calendarfetcher:/browser/interfaces.py:16
 msgid ""
 " Please provide a list of ICS calendar URL addresses, each one on a new "
-"line. This calendar will then automatically be updated with events from the "
-"remote calendars."
+"line. This calendar can then be updated with events from these remote "
+"calendars."
 msgstr ""
 
 #: slc.calendarfetcher:/browser/interfaces.py:24
-msgid "Save URLs"
+msgid "Save"
 msgstr ""
 
 #: slc.calendarfetcher:/browser/interfaces.py:25
-msgid "Save and fetch the URLs"
+msgid "Save and fetch the calendars"
 msgstr ""
 
-#. Default: "The Calendar Fetcher will periodically fetch events from other calendars by using their iCal (*.ics) URLs specified here."
+#. Default: "The CalendarFetcher can fetch and import events from other calendars by using their ICS addresses specified here."
 #: slc.calendarfetcher:/browser/templates/configform.pt:23
 msgid "configform_description"
 msgstr ""

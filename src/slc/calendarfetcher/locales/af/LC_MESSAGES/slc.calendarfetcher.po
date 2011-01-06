@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Thu Jan  6 11:42:36 2011\n"
+"POT-Creation-Date: Thu Jan  6 12:08:03 2011\n"
 "PO-Revision-Date: 2010-12-14 20:27+0200\n"
 "Last-Translator: Jan-Carel Brand <jc@opkode.com>\n"
 "Language-Team: Afrikaans\n"
@@ -42,25 +42,24 @@ msgstr "Kalender adresse"
 #: slc.calendarfetcher:/browser/interfaces.py:16
 msgid ""
 " Please provide a list of ICS calendar URL addresses, each one on a new "
-"line. This calendar will then automatically be updated with events from the "
-"remote calendars."
-msgstr ""
-"Verskaf asseblief 'n lys van ICS kalender URL adresse, elk op 'n nuwe lyn. "
-"Hierdie kalender sal dan outomaties met die gebeure van die gegewe kalenders "
-"opgedateer word."
+"line. This calendar can then be updated with events from these remote "
+"calendars."
+msgstr "Verskaf asseblief 'n lys van ICS kalender URL adresse, elkeen op 'n nuwe lyn. Die huidige kalender kan dan met die gebeure van die gegewe kalenders opgedateer word."
 
 #: slc.calendarfetcher:/browser/interfaces.py:24
-msgid "Save URLs"
+msgid "Save"
 msgstr "Stoor"
 
 #: slc.calendarfetcher:/browser/interfaces.py:25
-msgid "Save and fetch the URLs"
+msgid "Save and fetch the calendars"
 msgstr "Stoor en gaan haal die kalenders"
 
-#. Default: "The Calendar Fetcher will periodically fetch events from other calendars by using their iCal (*.ics) URLs specified here."
+#. Default: "The CalendarFetcher can fetch and import events from other calendars by using their ICS addresses specified here."
 #: slc.calendarfetcher:/browser/templates/configform.pt:23
 msgid "configform_description"
-msgstr "Die CalendarFetcher kan periodies gebeure van ander kalenders (d.m.v hul ICS adresse hier verskaf) invoer en tot hierdie kalender byvoeg."
+msgstr ""
+"Die CalendarFetcher kan periodies gebeure van ander kalenders (d.m.v hul ICS "
+"adresse hier verskaf) invoer en tot hierdie kalender byvoeg."
 
 #: slc.calendarfetcher:/validators.py:12
 msgid "Please provide a valid URL."
@@ -69,3 +68,18 @@ msgstr "Verskaf asseblief 'n geldige URL."
 #: slc.calendarfetcher:/validators.py:22
 msgid "The specified resource, '%s' is not a valid URL."
 msgstr "Die gegewe hulpbron, '%s', is nie 'n geldige URL nie."
+
+#~ msgid ""
+#~ " Please provide a list of ICS calendar URL addresses, each one on a new "
+#~ "line. This calendar will then automatically be updated with events from "
+#~ "the remote calendars."
+#~ msgstr ""
+#~ "Verskaf asseblief 'n lys van ICS kalender URL adresse, elk op 'n nuwe "
+#~ "lyn. Hierdie kalender sal dan outomaties met die gebeure van die gegewe "
+#~ "kalenders opgedateer word."
+
+#~ msgid "Save URLs"
+#~ msgstr "Stoor"
+
+#~ msgid "Save and fetch the URLs"
+#~ msgstr "Stoor en gaan haal die kalenders"
