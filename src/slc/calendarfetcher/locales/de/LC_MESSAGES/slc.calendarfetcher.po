@@ -22,6 +22,19 @@ msgid ""
 "remote calendars."
 msgstr ""
 
+#: slc.calendarfetcher:/browser/interfaces.py:24
+msgid "Save URLs"
+msgstr ""
+
+#: slc.calendarfetcher:/browser/interfaces.py:25
+msgid "Save and fetch the URLs"
+msgstr ""
+
+#. Default: "The Calendar Fetcher will periodically fetch events from other calendars by using their iCal (*.ics) URLs specified here."
+#: slc.calendarfetcher:/browser/templates/configform.pt:23
+msgid "configform_description"
+msgstr ""
+
 #: slc.calendarfetcher:/validators.py:12
 msgid "Please provide a valid URL."
 msgstr ""

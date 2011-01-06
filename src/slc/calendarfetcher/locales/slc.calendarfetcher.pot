@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Wed Jan  5 17:07:58 2011\n"
+"POT-Creation-Date: Thu Jan  6 11:42:36 2011\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Zope 3 Developers <zope-dev@zope.org>\n"
@@ -42,6 +42,19 @@ msgstr ""
 
 #: slc.calendarfetcher:/browser/interfaces.py:16
 msgid " Please provide a list of ICS calendar URL addresses, each one on a new line. This calendar will then automatically be updated with events from the remote calendars."
+msgstr ""
+
+#: slc.calendarfetcher:/browser/interfaces.py:24
+msgid "Save URLs"
+msgstr ""
+
+#: slc.calendarfetcher:/browser/interfaces.py:25
+msgid "Save and fetch the URLs"
+msgstr ""
+
+#: slc.calendarfetcher:/browser/templates/configform.pt:23
+#. Default: "The Calendar Fetcher will periodically fetch events from other calendars by using their iCal (*.ics) URLs specified here."
+msgid "configform_description"
 msgstr ""
 
 #: slc.calendarfetcher:/validators.py:12
