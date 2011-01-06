@@ -58,8 +58,7 @@ msgstr "Stoor en gaan haal die kalenders"
 #: slc.calendarfetcher:/browser/templates/configform.pt:23
 msgid "configform_description"
 msgstr ""
-"Die CalendarFetcher kan periodies gebeure van ander kalenders (d.m.v hul ICS "
-"adresse hier verskaf) invoer en tot hierdie kalender byvoeg."
+"Die CalendarFetcher kan gebeure van ander kalenders invoer (d.m.v hul ICS adresse hier verskaf) en tot hierdie kalender byvoeg."
 
 #: slc.calendarfetcher:/validators.py:12
 msgid "Please provide a valid URL."
