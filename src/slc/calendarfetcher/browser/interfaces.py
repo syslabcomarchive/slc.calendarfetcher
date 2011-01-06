@@ -21,8 +21,8 @@ class IConfigForm(interface.Interface):
                             ),
                         required=True,
                         ) 
-    add_url = button.Button(title=u'Save URLs')
-    add_and_refresh = button.Button(title=u'Save and fetch the URLs')
+    add_url = button.Button(title=_(u'Save URLs'))
+    add_and_refresh = button.Button(title=_(u'Save and fetch the URLs'))
 
 
 class IFetcherConfigView(interface.Interface):
