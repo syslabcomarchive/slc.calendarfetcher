@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1b5dev'
+version = '0.1b5'
 
 setup(name='slc.calendarfetcher',
       version=version,
