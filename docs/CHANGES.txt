@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1b6 (xxxxxxxxxx)
+------------------
+- Depend on p4a.plonecalendar 2.0a2+, which removes GS profile [iElectric]
+- Don't pindown versions of packages which breaks future ugprades [iElectric]
+
 0.1b5 (2011-01-07)
 ------------------
 
